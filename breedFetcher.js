@@ -15,26 +15,24 @@ const APINAME = "https://api.thecatapi.com/v1/breeds/search?q=";
 
 
 request(`${APINAME}${BREED}`, (error, response, body) => {
+  const data = JSON.parse(body);
 
   // and Edge Case: Request Failed
   if (error) {
     console.log('Your request fails because of this error :', error.code + error.hostname); // Print the error if one occurred
+
+  } else if (data.length === 0) {
+    // Edge Case Breed Not Found
+    //pop up every time, not only if []
+    // if (data.length === 0); {
+    console.log(` Requested breed name ${BREED} is not found `);
+
+  } else {
+    // deserialization of data, convert  String to Object
+
+    //get access to first el of array
+    // then to "description" propperty of object
+    console.log(data[0].description);
   }
-
-  // deserialization of data, convert  String to Object
-  const data = JSON.parse(body);
-
-
-  // Edge Case Breed Not Found
-  //pop up every time, not only if []
-  // if (data.length === 0); {
-  //   console.log(` Requested breed name ${BREED} is not found `);
-  // }
-
-  //get access to first el of array
-  // then to "description" propperty of object
-  console.log(data[0].description);
-
-
 
 });
