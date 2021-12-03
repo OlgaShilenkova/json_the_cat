@@ -18,10 +18,10 @@ describe('fetchBreedDescription', () => {
   });
 
 
-  it('should test the scenario where an invalid/non-existent breed is passed in', (done) => {
-    fetchBreedDescription('Siberian', (err, desc) => {
+  it('should test the scenario where an non-existent breed is passed in', (done) => {
+    fetchBreedDescription('Siberianian', (err, desc) => {
       // we do expect error for this scenario
-      assert.equal(err, null);
+      assert.equal(desc, ` Requested breed name Siberianian is not found `);
 
       done();
     });
